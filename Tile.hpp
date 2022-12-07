@@ -3,18 +3,20 @@
 #include <string>
 #include <vector>
 #include "Point.hpp"
+#include "BitFlag.hpp"
+
+namespace Mode
+{
+	constexpr BitFlag
+		horizontal = 0,
+		vertical = 1,
+		walk = 0,
+		step = 2;
+};
 
 class Tile
 {
 	// アニメーション形式
-	enum Mode :unsigned char
-	{
-		vertical = 0,
-		horizontal = 1,
-		walk = 0,
-		step = 2,
-	};
-
 	// タイル情報
 	struct Data
 	{
@@ -48,10 +50,10 @@ class Tile
 	// アニメーションタイルセット
 	struct Anim :public Common
 	{
+		BitFlag mode;
 		unsigned char pattern;
-		unsigned char type;
 
-		Anim(const char8_t* graph, unsigned short tnum, unsigned char type, int pattern);
+		Anim(const char8_t* graph, unsigned short tnum, unsigned char flag, unsigned char pattern);
 		Ret get(int id, int t)const override;
 	};
 

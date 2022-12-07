@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileSetEdit.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="Particle.hpp" />
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="Tile.hpp" />
+    <ClInclude Include="TileSetEdit.hpp" />
     <ClInclude Include="UI.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

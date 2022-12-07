@@ -24,12 +24,12 @@ Tile::Ret Tile::Norm::get(int id, int t)const
 	return { Handle::get(path, Handle::type::graph),num(id) * size,data[id] };
 }
 
-Tile::Anim::Anim(const char8_t* graph, unsigned short tnum, unsigned char type, int pattern) :pattern(pattern), type(type)
+Tile::Anim::Anim(const char8_t* graph, unsigned short tnum, unsigned char flag, unsigned char pattern) :mode(flag), pattern(pattern)
 {
 	path = graph;
 	GetGraphSize(Handle::get(path, Handle::type::graph), &num.x, &num.y);
 	num /= size;
-	if (type & Mode::horizontal)
+	if (mode(0))
 		num.y /= pattern;
 	else
 		num.x /= pattern;
@@ -43,7 +43,7 @@ Tile::Ret Tile::Anim::get(int id, int t)const
 	if (data.size() <= id)
 		throw std::out_of_range("out of range");
 	auto buf = num(id);
-	if (type & Mode::step)
+	if (mode(1))
 	{
 		t %= (pattern - 1) * 2;
 		if (t >= pattern)
@@ -51,7 +51,7 @@ Tile::Ret Tile::Anim::get(int id, int t)const
 	}
 	else
 		t %= pattern;
-	if (type & Mode::horizontal)
+	if (mode(0))
 		buf.y += num.y * t;
 	else
 		buf.x += num.x * t;
